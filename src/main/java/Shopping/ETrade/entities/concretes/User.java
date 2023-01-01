@@ -1,11 +1,12 @@
-package Shopping.ETrade.core.entities;
+package Shopping.ETrade.entities.concretes;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -13,7 +14,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "/users")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -21,18 +22,15 @@ public class User {
     @Column(name = "id")
     private int id;
 
-    @NotNull
-    @NotBlank
+
     @Column(name = "name")
     private String name;
 
-    @NotBlank
-    @NotNull
+
     @Column(name = "password")
     private int password;
 
-    @Email
-    @NotNull
+
     @Column(name = "email")
     private String email;
 }

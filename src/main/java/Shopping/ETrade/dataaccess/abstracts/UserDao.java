@@ -1,7 +1,10 @@
-package Shopping.ETrade.core.dataaccess;
+package Shopping.ETrade.dataaccess.abstracts;
 
-import Shopping.ETrade.core.entities.User;
+import Shopping.ETrade.entities.concretes.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserDao extends JpaRepository<User,Integer> {
+
+    void deleteAll();
+
 }

@@ -1,16 +1,17 @@
 package Shopping.ETrade.entities.concretes;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "/categories")
+@Table(name = "categories")
 
 public class Category {
 
@@ -23,6 +24,6 @@ public class Category {
     private String categoryName;
 
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Product> products;
 }

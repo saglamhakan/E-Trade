@@ -1,4 +1,4 @@
-package Shopping.ETrade.core.result;
+package Shopping.ETrade.result;
 
 public class Result {
     public boolean success;

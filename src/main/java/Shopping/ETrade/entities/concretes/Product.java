@@ -1,16 +1,17 @@
 package Shopping.ETrade.entities.concretes;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "/products")
+@Table(name = "products")
 
 public class Product {
 
@@ -31,7 +32,7 @@ public class Product {
     @Column(name = "product_color")
     private String productColor;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
 }

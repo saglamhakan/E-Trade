@@ -1,15 +1,18 @@
 package Shopping.ETrade.business.abstracts;
 
-import Shopping.ETrade.core.result.DataResult;
-import Shopping.ETrade.core.result.Result;
+import Shopping.ETrade.business.dtos.ProductListDto;
+import Shopping.ETrade.business.request.AddProductRequest;
+import Shopping.ETrade.result.DataResult;
+import Shopping.ETrade.result.Result;
 import Shopping.ETrade.entities.concretes.Product;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 
 public interface ProductService {
-    DataResult<List<Product>> getAll();
-    Result add (Product product);
+    DataResult<List<ProductListDto>> getAll();
+    Result add (AddProductRequest addProductRequest);
     DataResult<Product> getByCategoryId(int categoryId);
+
+    void delete();
 }
