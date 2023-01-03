@@ -14,4 +14,6 @@ public class UserListDto {
     private int password;
 
     private String email;
+
+
 }

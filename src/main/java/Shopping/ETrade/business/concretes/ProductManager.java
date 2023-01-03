@@ -98,10 +98,10 @@ public class ProductManager implements ProductService {
         return productListDto;
     }
 
-    @Override
+  /*  @Override
     public void delete() {
         productsDao.deleteAll();
-    }
+   */}
 
 
-}
+//}

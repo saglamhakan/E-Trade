@@ -62,10 +62,11 @@ public class CategoryManager implements CategoryService {
         return new SuccessDataResult<List<CategoryListDto>>(categoryListDtoList, "Category listed");
     }
 
-    @Override
-    public void delete() {
-        categoryDao.deleteAll();
-    }
+
+  //  @Override
+    //public void delete() {
+      //  categoryDao.deleteAll();
+   // }
 
     private Category convertAddCategoryRequestToCategory(AddCategoryRequest addCategoryRequest) {
         Category category = new Category();

@@ -37,11 +37,11 @@ public class CategoriesController {
         return this.categoryService.getByCategoryId(categoryId);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity deleteCategory(){
-        categoryService.delete();
-        return ResponseEntity.ok().build();
-    }
+  //  @DeleteMapping("/delete")
+    //public ResponseEntity deleteCategory(){
+      //  categoryService.delete();
+        //return ResponseEntity.ok().build();
+    //}
 
 
 }

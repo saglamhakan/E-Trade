@@ -38,9 +38,9 @@ public class ProductsController {
         return this.productService.getByCategoryId(productId);
     }
 
-    @DeleteMapping("/delete")
+   /* @DeleteMapping("/delete")
     public ResponseEntity deleteProduct() {
         productService.delete();
         return ResponseEntity.ok().build();
-    }
-    }
+   */ }
+    //}
