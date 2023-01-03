@@ -3,10 +3,12 @@ package Shopping.ETrade.business.concretes;
 import Shopping.ETrade.business.abstracts.UserService;
 import Shopping.ETrade.business.dtos.ProductListDto;
 import Shopping.ETrade.business.dtos.UserListDto;
+import Shopping.ETrade.business.request.AddProductRequest;
 import Shopping.ETrade.business.request.AddUserRequest;
 import Shopping.ETrade.business.request.DeleteUserRequest;
 import Shopping.ETrade.dataaccess.abstracts.ProductsDao;
 import Shopping.ETrade.dataaccess.abstracts.UserDao;
+import Shopping.ETrade.entities.concretes.Category;
 import Shopping.ETrade.entities.concretes.Product;
 import Shopping.ETrade.entities.concretes.User;
 import Shopping.ETrade.result.*;
@@ -59,7 +61,8 @@ public class UserManager implements UserService {
 
     @Override
     public void deleteByUserId(DeleteUserRequest deleteUserRequest) {
-        this.userDao.deleteByUserId(deleteUserRequest);
+        User user = this.convertDeleteUserRequestToUser(deleteUserRequest);
+        productsDao.deleteById(deleteUserRequest.getUserId());
     }
 
 
@@ -102,6 +105,13 @@ public class UserManager implements UserService {
         return userListDto;
     }
 
+    private User convertDeleteUserRequestToUser(DeleteUserRequest deleteUserRequest) {
+        User user = new User();
 
+        user.setUserId(deleteUserRequest.getUserId());
+
+        return user;
+
+    }
 }
 
