@@ -61,6 +61,11 @@ public class ProductManager implements ProductService {
 
     }
 
+    @Override
+    public void deleteById(int productId) {
+        this.productsDao.deleteById(productId);
+    }
+
 
     private Product convertAddProductRequestToProduct(AddProductRequest addProductRequest) {
         Product product = new Product();

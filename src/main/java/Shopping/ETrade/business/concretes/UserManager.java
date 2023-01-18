@@ -1,35 +1,36 @@
 package Shopping.ETrade.business.concretes;
 
 import Shopping.ETrade.business.abstracts.UserService;
-import Shopping.ETrade.business.dtos.ProductListDto;
 import Shopping.ETrade.business.dtos.UserListDto;
-import Shopping.ETrade.business.request.AddProductRequest;
 import Shopping.ETrade.business.request.AddUserRequest;
-import Shopping.ETrade.business.request.DeleteUserRequest;
 import Shopping.ETrade.dataaccess.abstracts.ProductsDao;
+import Shopping.ETrade.dataaccess.abstracts.RoleDao;
 import Shopping.ETrade.dataaccess.abstracts.UserDao;
-import Shopping.ETrade.entities.concretes.Category;
-import Shopping.ETrade.entities.concretes.Product;
+import Shopping.ETrade.entities.concretes.Role;
 import Shopping.ETrade.entities.concretes.User;
 import Shopping.ETrade.result.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class UserManager implements UserService {
     private UserDao userDao;
     private final ProductsDao productsDao;
+    private final RoleDao roleDao;
+
 
     @Autowired
     public UserManager(UserDao userDao,
-                       ProductsDao productsDao) {
+                       ProductsDao productsDao,
+                       RoleDao roleDao) {
         this.userDao = userDao;
         this.productsDao = productsDao;
+        this.roleDao = roleDao;
     }
 
     @Override
@@ -42,6 +43,24 @@ public class UserManager implements UserService {
         } else {
             return new ErrorResult("User not added");
         }
+
+    }
+
+    @Override
+    public User findByUserName(String userName) {
+        return userDao.findByUserName(userName);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userDao.findByUserName(email);
+    }
+
+    public void save(User user) {
+        user.setRoles(Arrays.asList(roleDao.findByRole("USER")));
+        user.setEnabled(true);
+        userDao.save(user);
+
 
     }
 
@@ -60,27 +79,28 @@ public class UserManager implements UserService {
     }
 
     @Override
-    public void deleteByUserId(DeleteUserRequest deleteUserRequest) {
-        User user = this.convertDeleteUserRequestToUser(deleteUserRequest);
-        productsDao.deleteById(deleteUserRequest.getUserId());
+    public void deleteById(int userId) {
+        this.userDao.deleteById(userId);
+
     }
 
 
-
-
-  /*  @Override
-    public void delete() {
-        userDao.deleteAll();
+    @Override
+    public DataResult<User> getByUserId(int userId) {
+        return new SuccessDataResult<User>(
+                this.userDao.getByUserId(userId).getData());
     }
 
-*/
 
     private User convertAddUserRequestToUser(AddUserRequest adduserRequest) {
         User user = new User();
 
-        user.setName(adduserRequest.getName());
+        user.setFirstName(adduserRequest.getFirstName());
+        user.setLastName(adduserRequest.getLastName());
+        user.setUserName(adduserRequest.getUserName());
         user.setEmail(adduserRequest.getEmail());
         user.setPassword(adduserRequest.getPassword());
+        user.setUserId(adduserRequest.getUserId());
 
         return user;
     }
@@ -88,7 +108,7 @@ public class UserManager implements UserService {
     private boolean validateRequest(AddUserRequest addUserRequest) {
         boolean isSuccess = true;
 
-        if (StringUtils.isEmpty(addUserRequest.getName())) {
+        if (StringUtils.isEmpty(addUserRequest.getUserName())) {
             isSuccess = false;
         }
         return isSuccess;
@@ -97,21 +117,16 @@ public class UserManager implements UserService {
     private UserListDto convertUserToUserListDto(User user) {
         UserListDto userListDto = new UserListDto();
 
-        userListDto.setName(user.getName());
+        userListDto.setFirstName(user.getFirstName());
+        userListDto.setLastName(user.getLastName());
+        userListDto.setUserName(user.getUserName());
         userListDto.setEmail(user.getEmail());
         userListDto.setPassword(user.getPassword());
-
+        userListDto.setUserId(user.getUserId());
 
         return userListDto;
     }
 
-    private User convertDeleteUserRequestToUser(DeleteUserRequest deleteUserRequest) {
-        User user = new User();
 
-        user.setUserId(deleteUserRequest.getUserId());
-
-        return user;
-
-    }
 }
 

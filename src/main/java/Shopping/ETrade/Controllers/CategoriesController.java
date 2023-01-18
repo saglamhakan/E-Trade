@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "/categories")
+@RequestMapping("/api/categories")
 public class CategoriesController {
 
     private CategoryService categoryService;
@@ -35,6 +35,10 @@ public class CategoriesController {
     }
     public DataResult<Category> getByCategoryId(int categoryId) {
         return this.categoryService.getByCategoryId(categoryId);
+    }
+    @DeleteMapping("/delete")
+    public void deleteById(@RequestParam int categoryId){
+        this.categoryService.deleteById(categoryId);
     }
 
   //  @DeleteMapping("/delete")

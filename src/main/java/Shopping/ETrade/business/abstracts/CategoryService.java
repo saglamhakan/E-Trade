@@ -15,6 +15,8 @@ public interface CategoryService {
 
     DataResult<List<CategoryListDto>> getAll();
 
+    void deleteById(int categoryId);
+
 
 
 

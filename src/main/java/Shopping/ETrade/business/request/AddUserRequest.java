@@ -9,11 +9,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AddUserRequest {
 
-    private String name;
+    private String firstName;
 
-    private int password;
+    private String lastName;
+
+    private String userName;
+
+    private String password;
 
     private String email;
+
+    private int userId;
 
 
 }

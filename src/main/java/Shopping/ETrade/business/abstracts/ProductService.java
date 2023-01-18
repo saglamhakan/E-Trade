@@ -14,5 +14,7 @@ public interface ProductService {
     Result add (AddProductRequest addProductRequest);
     DataResult<Product> getByCategoryId(int categoryId);
 
+    void deleteById(int productId);
+
    // void delete();
 }

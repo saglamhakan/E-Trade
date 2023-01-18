@@ -38,9 +38,15 @@ public class ProductsController {
         return this.productService.getByCategoryId(productId);
     }
 
+    @DeleteMapping("/delete")
+    public void deleteById(@RequestParam int productId) {
+        this.productService.deleteById(productId);
+    }
+
    /* @DeleteMapping("/delete")
     public ResponseEntity deleteProduct() {
         productService.delete();
         return ResponseEntity.ok().build();
-   */ }
-    //}
+   */
+}
+//}
