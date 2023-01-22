@@ -1,6 +1,9 @@
 package Shopping.ETrade.config;
 
+import lombok.Builder;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+
 
 @Configuration
 @EnableWebSecurity
@@ -24,11 +29,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements A
         http.httpBasic();
         http.formLogin();
         http.csrf().disable();
-        http.authorizeRequests()
+        http.authorizeHttpRequests()
                 .antMatchers("/dashboard").hasAnyRole("ADMİN", "USER")
                 .antMatchers("/admin").hasRole("ADMİN")
                 .and()
-                .authorizeRequests()
+                .authorizeHttpRequests()
                 .antMatchers("/index")
                 .permitAll();
     }
